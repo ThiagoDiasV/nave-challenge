@@ -1,4 +1,3 @@
-from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 import pytest
 
