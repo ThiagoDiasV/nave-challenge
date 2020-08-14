@@ -1,6 +1,14 @@
 language: python
+sudo: true
+
 python:
   - 3.8
+services:
+  postgresql
+addons:
+  postgresql: '12'
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - python -m venv .venv
   - source .venv/bin/activate
