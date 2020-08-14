@@ -1,0 +1,11 @@
+[run]
+source=nave
+omit = */tests/*
+       */migrations/*
+       */wsgi.py
+       */asgi.py
+       */apps.py
+       */tests.py
+       manage.py
+       */__init__.py
+       */settings.py

@@ -1,0 +1,13 @@
+language: python
+python:
+  - 3.8
+script:
+  - python -m venv .venv
+  - source .venv/bin/activate
+install:
+  - pip install -q -r requirements.txt
+script:
+  - flake8
+  - pytest --cov=nave
+after_success:
+  - codecov
