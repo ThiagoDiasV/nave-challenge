@@ -91,6 +91,15 @@ class ListCreateProjectView(ListCreateAPIView):
     serializer_class = ProjectSerializer
     queryset = Project.objects.all()
 
+    def get_queryset(self):
+        if self.request.GET:
+            queryset = Project.objects.filter(
+                navers=self.request.user.naver, name__icontains=self.request.GET["name"]
+            )
+        else:
+            queryset = Project.objects.all()
+        return queryset
+
 
 class RetrieveUpdateDestroyProjectView(RetrieveUpdateDestroyAPIView):
     """

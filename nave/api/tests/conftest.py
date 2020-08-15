@@ -1,7 +1,9 @@
-from datetime import datetime
+from datetime import date
 
 import pytest
 from django.contrib.auth import get_user_model
+from rest_framework.test import APIClient
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from nave.api.models import Naver, Project
 
@@ -49,8 +51,8 @@ def naver(user):
     naver = Naver.objects.create(
         user=user,
         name="teste",
-        birthdate=datetime(2012, 6, 6),
-        admission_date=datetime(2016, 6, 6),
+        birthdate=date(2012, 6, 6),
+        admission_date=date(2016, 6, 6),
         job_role="Dev",
     )
     yield naver
@@ -69,3 +71,28 @@ def project(naver):
 def project_without_navers():
     project = Project.objects.create(name="Project no navers")
     yield project
+
+
+@pytest.fixture
+def api_client(user):
+    client = APIClient()
+    refresh = RefreshToken.for_user(user)
+    client.credentials(HTTP_AUTHORIZATION=f"Bearer {refresh.access_token}")
+
+    return client
+
+
+@pytest.fixture
+@pytest.mark.django_db
+def second_user():
+    user = get_user_model().objects.create_user("teste2@teste.com", "12345")
+    yield user
+
+
+@pytest.fixture
+@pytest.mark.django_db
+def second_naver(second_user):
+    naver = Naver.objects.create(
+        user=second_user, name="teste2", birthdate=date(2000, 1, 1), job_role="Dev"
+    )
+    yield naver
