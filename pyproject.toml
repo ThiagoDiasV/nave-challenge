@@ -13,6 +13,8 @@ djangorestframework_simplejwt = "^4.4.0"
 djoser = "^2.0.3"
 psycopg2-binary = "^2.8.5"
 python-decouple = "^3.3"
+ipython = "^7.17.0"
+ipdb = "^0.13.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.1"
