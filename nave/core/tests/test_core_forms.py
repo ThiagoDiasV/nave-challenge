@@ -1,26 +1,27 @@
-from django.contrib.auth import get_user_model
-from nave.core.admin import UserCreationForm
 import pytest
+from django.contrib.auth import get_user_model
+
+from nave.core.admin import UserCreationForm
 
 
 @pytest.mark.django_db
 def test_user_creation_form_with_different_passwords():
     data = {
-        'email': 'teste@teste.com',
-        'password1': 'weakpassword',
-        'password2': 'differentpassword',
+        "email": "teste@teste.com",
+        "password1": "weakpassword",
+        "password2": "differentpassword",
     }
     form = UserCreationForm(data)
     form.is_valid()
-    assert "Passwords don't match" in form.errors['password2']
+    assert "Passwords don't match" in form.errors["password2"]
 
 
 @pytest.mark.django_db
 def test_user_creation_form_with_correct_data():
     data = {
-        'email': 'teste@teste.com',
-        'password1': 'weakpassword',
-        'password2': 'weakpassword',
+        "email": "teste@teste.com",
+        "password1": "weakpassword",
+        "password2": "weakpassword",
     }
     form = UserCreationForm(data)
     form.is_valid()
@@ -30,9 +31,9 @@ def test_user_creation_form_with_correct_data():
 @pytest.mark.django_db
 def test_user_creation_form_save_method():
     data = {
-        'email': 'teste@teste.com',
-        'password1': 'weakpassword',
-        'password2': 'weakpassword',
+        "email": "teste@teste.com",
+        "password1": "weakpassword",
+        "password2": "weakpassword",
     }
     form = UserCreationForm(data)
     form.is_valid()
