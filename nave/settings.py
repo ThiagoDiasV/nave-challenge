@@ -1,8 +1,9 @@
+import os
 from datetime import timedelta
 from pathlib import Path
-import os
+
+from decouple import Csv, config
 from django.conf import settings
-from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -31,11 +32,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "nave.api",
     "nave.core",
-    "nave.naver",
-    "nave.project",
-    "djoser",
     "rest_framework",
     "rest_framework_simplejwt",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -102,6 +101,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
 
 SIMPLE_JWT = {

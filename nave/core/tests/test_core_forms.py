@@ -1,6 +1,7 @@
-from django.contrib.auth import get_user_model
-from nave.core.admin import UserCreationForm
 import pytest
+from django.contrib.auth import get_user_model
+
+from nave.core.admin import UserCreationForm
 
 
 @pytest.mark.django_db

@@ -1,18 +1,23 @@
 from django.contrib.auth import get_user_model
-from rest_framework import permissions, authentication, status
+from rest_framework import permissions, status
 from rest_framework.generics import (
     CreateAPIView,
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.response import Response
-from nave.naver.models import Naver
-from nave.naver.serializers import NaverSerializer
-from nave.project.models import Project
-from nave.project.serializers import ProjectSerializer
-from .permissions import IsOwnerOrReadOnly
 
 from nave.core.serializers import UserSerializer
+
+from .filters import NaverFilterBackends
+from .models import Naver, Project
+from .permissions import IsNaverUserOrReadOnly, IsProjectNaverOrReadOnly
+from .serializers import (
+    NaverSerializer,
+    NaverSerializerDepth1,
+    ProjectSerializer,
+    ProjectSerializerDepth1,
+)
 
 User = get_user_model()
 
@@ -27,41 +32,13 @@ class CreateUserView(CreateAPIView):
     serializer_class = UserSerializer
 
 
-# class NaverViewSet(ModelViewSet):
-#     """
-#     Naver ModelViewSet.
-
-#     Requires token authentication.
-#     """
-
-#     authentication_classes = [authentication.SessionAuthentication]
-#     permission_classes = [permissions.IsAuthenticated]
-#     queryset = Naver.objects.all()
-#     serializer_class = NaverSerializer
-
-
-# class ProjectViewSet(ModelViewSet):
-#     """
-#     Project ModelViewSet.
-
-#     Requires token authentication.
-#     """
-
-#     authentication_classes = [authentication.SessionAuthentication]
-#     permission_classes = [permissions.IsAuthenticated]
-#     queryset = Project.objects.all()
-#     serializer_class = ProjectSerializer
-
-
-class ListCreateNaverView(ListCreateAPIView):
+class ListCreateNaverView(ListCreateAPIView, NaverFilterBackends):
     """
     View to create new navers.
 
-    Requires token authentication.
+    Requires jwt authentication.
     """
 
-    authentication_classes = [authentication.SessionAuthentication]
-    # authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     model = Naver
     serializer_class = NaverSerializer
@@ -86,60 +63,47 @@ class ListCreateNaverView(ListCreateAPIView):
 
 
 class RetrieveUpdateDestroyNaverView(RetrieveUpdateDestroyAPIView):
-    authentication_classes = [authentication.SessionAuthentication]
-    # authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    """
+    View to retrieve, update or destroy a naver.
+
+    Requires jwt authentication.
+    """
+
+    permission_classes = [permissions.IsAuthenticated, IsNaverUserOrReadOnly]
     model = Naver
-    serializer_class = NaverSerializer
     queryset = Naver.objects.all()
 
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return NaverSerializerDepth1
+        return NaverSerializer
 
-class CreateProjectView(CreateAPIView):
+
+class ListCreateProjectView(ListCreateAPIView):
     """
-    View to create new projects.
+    View to list or create new projects.
 
-    Requires token authentication.
+    Requires jwt authentication.
     """
 
-    # authentication_classes = [authentication.TokenAuthentication]
-    authentication_classes = [authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
-
     model = Project
     serializer_class = ProjectSerializer
+    queryset = Project.objects.all()
 
 
-# class ListNavers(APIView):
-#     """
-#     View to list all navers in the system.
+class RetrieveUpdateDestroyProjectView(RetrieveUpdateDestroyAPIView):
+    """
+    View to retrieve, update or destroy a project.
 
-#     Requires token authentication.
-#     """
+    Requires jwt authentication.
+    """
 
-#     authentication_classes = [authentication.TokenAuthentication]
-#     permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsProjectNaverOrReadOnly]
+    model = Project
+    queryset = Project.objects.all()
 
-#     def get(self, request, format=None):
-#         """
-#         Return a list of all navers.
-#         """
-#         navers = [naver for naver in Naver.objects.all()]
-#         return Response(navers)
-
-
-# class ListNavers(APIView):
-#     """
-#     View to list all navers in the system.
-
-#     Requires token authentication.
-#     """
-
-#     authentication_classes = [authentication.TokenAuthentication]
-#     permission_classes = [permissions.IsAuthenticated]
-
-#     def get(self, request, format=None):
-#         """
-#         Return a list of all navers.
-#         """
-#         navers = [naver for naver in Naver.objects.all()]
-#         return Response(navers)
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ProjectSerializerDepth1
+        return ProjectSerializer
