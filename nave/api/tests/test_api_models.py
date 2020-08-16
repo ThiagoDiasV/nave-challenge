@@ -1,4 +1,9 @@
+import datetime
+
 import pytest
+from django.core.validators import ValidationError
+
+from nave.api.models import Naver
 
 
 @pytest.mark.django_db
