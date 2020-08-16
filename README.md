@@ -31,8 +31,8 @@ Now you will be able to navigate through the Nave API at 0.0.0.0:8000.
     database. The settings.py file is configured by default to create a SQLite3
     file if you can't or if you wan't to create a Postgres database. 
 
-    If you want to run locally with Postgres as DBMS, rename the `.env-docker`
-    file in nave folder to `.env` and change the environment variables in `.env`
+    If you want to run locally with Postgres as DBMS, rename the .env-docker
+    file in nave folder to .env and change the environment variables in .env
     file to allow the correct communication with Postgres. 
 
 Prefer to create a Python virtual environment and then
