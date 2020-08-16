@@ -32,7 +32,7 @@ This command above will:
 
 Now you will be able to navigate through the Nave API at 0.0.0.0:8000.
 
-By default, the root url will redirect you to `openapi/swagger/` endpoint. 
+By default, the root url will redirect you to `/openapi/swagger/` endpoint. 
 
 ### Using local Python 3.8
 
