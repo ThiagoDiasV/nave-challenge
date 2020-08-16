@@ -5,6 +5,10 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for custom user model.
+    """
+
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):

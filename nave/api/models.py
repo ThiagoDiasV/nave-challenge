@@ -6,6 +6,11 @@ from django.db import models
 
 
 class Naver(models.Model):
+    """
+    Naver model with user, name, birthdate, admission_date,
+    job_role and projects fields.
+    """
+
     user = models.OneToOneField(
         get_user_model(), verbose_name="User", on_delete=models.CASCADE
     )
@@ -30,6 +35,10 @@ class Naver(models.Model):
 
 
 class Project(models.Model):
+    """
+    Project model with name and navers fields.
+    """
+
     name = models.CharField(max_length=50, verbose_name="Project name")
     navers = models.ManyToManyField("Naver", through="Naver_projects", blank=True)
 

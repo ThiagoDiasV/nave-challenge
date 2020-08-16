@@ -3,6 +3,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 class UserManager(BaseUserManager):
+    """
+    Custom manager for new core.User model.
+    """
+
     use_in_migrations = True
 
     def create_user(self, email, password=None):

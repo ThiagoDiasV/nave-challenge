@@ -4,6 +4,10 @@ from .models import Naver, Project
 
 
 class NaverSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Naver model.
+    """
+
     class Meta:
         model = Naver
         exclude = ("user",)
@@ -18,12 +22,21 @@ class NaverSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Project model.
+    """
+
     class Meta:
         model = Project
         fields = "__all__"
 
 
 class NaverSerializerDepth1(serializers.ModelSerializer):
+    """
+    Serializer for Naver model with depth equals to 1,
+    in order to show more detailed from related objects.
+    """
+
     class Meta:
         model = Naver
         exclude = ("user",)
@@ -31,6 +44,11 @@ class NaverSerializerDepth1(serializers.ModelSerializer):
 
 
 class ProjectSerializerDepth1(serializers.ModelSerializer):
+    """
+    Serializer for Project model with depth equals to 1,
+    in order to show more detailed info from related objects.
+    """
+
     class Meta:
         model = Project
         fields = "__all__"
