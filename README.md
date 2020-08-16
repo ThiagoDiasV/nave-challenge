@@ -23,6 +23,8 @@ This command above will:
 
 Now you will be able to navigate through the Nave API at 0.0.0.0:8000.
 
+By default, the root url will redirect you to `openapi/swagger/` endpoint. 
+
 ### Using local Python 3.8
 
     Obs: this way has some caveats. To use Postgres as the database management
@@ -46,7 +48,9 @@ After installing requirements run:
 
 The API will be available at localhost:8000
 
-## Run the tests
+By default, the root url will redirect you to `openapi/swagger/` endpoint. 
+
+## Run tests
 
 You can cover Nave API with unit tests running:
 

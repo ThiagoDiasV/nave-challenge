@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.views.generic import RedirectView
 from django.urls import include, path, re_path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -9,6 +10,7 @@ from nave.api import urls as api_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(api_urls)),
+    path("", RedirectView.as_view(pattern_name='schema-swagger-ui')),
 ]
 
 urlpatterns += [
