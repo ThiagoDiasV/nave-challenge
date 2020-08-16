@@ -25,6 +25,16 @@ Now you will be able to navigate through the Nave API at 0.0.0.0:8000.
 
 ### Using local Python 3.8
 
+    Obs: this way has some caveats. To use Postgres as the database management
+    system you should create first the database using a local Postgres instance
+    and configure the environment variables to communicate correctly with the new
+    database. The settings.py file is configured by default to create a SQLite3
+    file if you can't or if you wan't to create a Postgres database. 
+
+    If you want to run locally with Postgres as DBMS, rename the `.env-docker`
+    file in nave folder to `.env` and change the environment variables in `.env`
+    file to allow the correct communication with Postgres. 
+
 Prefer to create a Python virtual environment and then
 
     (venv) $  pip install -r requirements.txt
@@ -132,6 +142,7 @@ Takes a set of user credentials and returns an access and refresh JSON web token
 
     - Content
         `access` and `refresh` tokens to allow access to the API.
+        I.e.
         ```
         {
             "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU5NzYyMzQxMCwianRpIjoiNDg2OTBlNDU0MTZmNDEwNzg1NGM2ODY5N2M1NzI5NjYiLCJ1c2VyX2lkIjoyfQ.T2f8SMnp1qmpVXOi3-jPbt5lVlsGZVf12XsDsG4xzsE",
@@ -167,11 +178,20 @@ Takes a refresh type JSON web token and returns an access type JSON web token if
 
     - Content
         `access` token.
+        I.e.
         ```
         {
             "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk3NTM3NTIzLCJqdGkiOiJiYTA4OTU5MmZiMmM0NzExYTAyZDk2MmFkMzFhNTgwMiIsInVzZXJfaWQiOjJ9.qGmWlLceDGtcRF_icfKj5FiDH_6W3pd4aQyjerIADsU"
         }
         ```
+
+#### Navers and Projects endpoints
+
+Take a look at `/openapi/swagger/` endpoint to see how to send HTTP requests to Nave API. 
+
+You must send the `access token` in a `Authorization: Bearer` string with each header of a HTTP request. 
+
+If you are using Postman, open label `Headers`, the `key` must be `Authorization` and the `value` should be the `access token` received.
 
 
 ## API documentation endpoints
