@@ -6,6 +6,15 @@
 
 ## Install and run
 
+Main requirements:
+
+* Python 3.8
+* Django 3.1
+* Django Rest Framework 3.11
+* Django Rest Framework Simple JWT 4.4.0
+
+To ease the experience of using this API, prefer to run inside a Docker container.
+
 ### Using Dockerfile and docker-compose
 
 First you need to init a daemon with dockerd, so run dockerd:
