@@ -204,7 +204,7 @@ Take a look at `/openapi/swagger/` endpoint to see how to send HTTP requests to 
 
 You must send the `access token` in a `Authorization: Bearer` string with each header of a HTTP request. 
 
-If you are using Postman, open label `Headers`, the `key` must be `Authorization` and the `value` should be the `access token` received.
+If you are using Postman, open label `Headers`, the `key` must be `Authorization` and the `value` should be the `access token` received, like `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk3NTM0Mjk1LCJqdGkiOiIzYjNlNTQ5MDYxYzI0ZWJiOGMyYTdmY2E5YzI1Y2IyMSIsInVzZXJfaWQiOjF9.K8m_9RuIhv0TB1uJ1TH8fMHGwI89KzsNi0YjZBIYlAw`.
 
 
 ## API documentation endpoints
