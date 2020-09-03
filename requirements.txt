@@ -57,7 +57,7 @@ python-decouple==3.3
 pytz==2020.1
 regex==2020.7.14
 requests==2.24.0
-ruamel.yaml==0.16.10
+ruamel.yaml==0.16.11
 ruamel.yaml.clib==0.2.0
 six==1.15.0
 snowballstemmer==2.0.0
