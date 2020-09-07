@@ -63,7 +63,7 @@ six==1.15.0
 snowballstemmer==2.0.0
 sqlparse==0.3.1
 toml==0.10.1
-traitlets==4.3.3
+traitlets==5.0.4
 typed-ast==1.4.1
 uritemplate==3.0.1
 urllib3==1.25.10
